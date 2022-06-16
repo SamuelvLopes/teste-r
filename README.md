@@ -2,6 +2,9 @@
 
 ## Modelo do Banco
 ![png](https://user-images.githubusercontent.com/51290633/174126553-1e0c9218-4e0d-484e-88ce-e306acf09383.png)
+## Modelo do banco com as relações em destaque
+![image](https://user-images.githubusercontent.com/51290633/174126692-843ebb02-100b-498c-8871-8af2293f892f.png)
+
 
 
 ## Codeignetor 3 será utilizado apenas para geração da Estrutura MVC 
