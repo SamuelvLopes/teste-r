@@ -1,5 +1,8 @@
 # desafio-r
 
+## Modelo do Banco
+![png](https://user-images.githubusercontent.com/51290633/174126553-1e0c9218-4e0d-484e-88ce-e306acf09383.png)
+
 
 ## Codeignetor 3 será utilizado apenas para geração da Estrutura MVC 
 ### instruções
