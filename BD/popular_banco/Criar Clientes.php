@@ -1,20 +1,20 @@
 <?php
 
     $dadosParaEnviar = http_build_query(
-        array(
+       [
             'acao' => 'gerar_cnpj',
             'pontuacao'=>'N'
             
-        )
+       ]
     );
 
-    $opcoes = array('http' =>
-        array(
+    $opcoes = ['http' =>
+      [
             'method'  => 'POST',
             'header'  => 'Content-Type: application/x-www-form-urlencoded',
             'content' => $dadosParaEnviar
-        )
-    );
+       ]
+      ];
 
     $contexto = stream_context_create($opcoes);
 
@@ -40,4 +40,8 @@
   $stmt->bindParam(':cnpj',$cnpj);
   $stmt->bindParam(':status',$ativo);
   $stmt->execute();
+  echo md5(time()).'<hr>';
 ?>
+<head>
+  <meta http-equiv="refresh" content="<?=rand(0,15)?>">
+</head>
