@@ -5,7 +5,11 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
+		foreach(	$this->connection->query("SELECT * FROM pao") as $linha){
 		
-		echo 'home mensagem';
+				var_dump($linha);
+				echo'<hr>';
+
+				}
 	}
 }
