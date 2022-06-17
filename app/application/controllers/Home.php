@@ -5,7 +5,7 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
-		foreach(	$this->connection->query("SELECT * FROM pao") as $linha){
+		foreach($this->connection->query("SELECT * FROM pao") as $linha){
 		
 				var_dump($linha);
 				echo'<hr>';

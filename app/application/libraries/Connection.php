@@ -1,15 +1,8 @@
 <?php 
-
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 class Connection{
-
-    public function __construct() {
-       echo'pao';
-    }
-
 function query($sql,$arg =0){
-
+    
    
 
    if($arg!=0){

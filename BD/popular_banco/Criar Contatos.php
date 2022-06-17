@@ -13,7 +13,7 @@
         $stmt->execute();
 
         foreach($stmt as $linha){
-            for ($i = 1; $i <= rand(1,10); $i++) {
+            for ($i = 0; $i <= rand(3,10); $i++) {
                
                
     $dominio=['pratics.com.br','gmail.com','outlook.com','bol.com','gov.br','globo.com','hotmail.com','live.com','yahoo.com'];
