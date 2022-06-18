@@ -7,6 +7,33 @@ class Api extends CI_Controller {
 	{
 		echo 'api is online';
 	}
+	public function Contato()
+	{
+		// contato/cadastro
+		//contato/1
+		//contato/alterar/1
+		//contato/exluir/1
+		//contato/cliente/1
+
+		
+
+		$rota=explode('/',$_SERVER["REQUEST_URI"]);
+		$dados=json_decode(file_get_contents('php://input'),true);
+		
+		if(intval($rota[count($rota)-1])==0){
+			
+			//cadastro;
+			
+
+		}else{
+
+			echo'else';
+
+		}
+		
+
+
+	}
 	public function cliente()
 	{
 		
@@ -28,6 +55,7 @@ class Api extends CI_Controller {
 			
 		}
 		if(intval($rota[count($rota)-1])==0){
+
 			//cadastro
 			if(!isset($dados['nome'])||!isset($dados['cnpj'])||!isset($dados['status'])||$dados['nome']==''||!is_numeric($dados['status'])){
 				echo json_encode(['retorno'=>'erro','motivo'=>'Faltam dados']);
@@ -136,5 +164,6 @@ class Api extends CI_Controller {
 		
 
 	}
+
 	
 }
