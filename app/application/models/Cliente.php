@@ -84,35 +84,52 @@
 
     }
 
+    public function ListarContatos($id){
+
+        $sql='SELECT * FROM CONTATO WHERE ID_CLIENTE=:id';
+        $arg=[];
+        $arg[]=['key'=>':id',"value"=>$id];
+
+        return $this->connection->query($sql,$arg)->fetchAll();
+
+    }
     public function ListarClientes($ativo=2,$limite=20,$pag=1){
-        
+        $arg=[];
+        $limite=preg_replace('/[^0-9]/is', '', $limite);
+        $pag=preg_replace('/[^0-9]/is', '', $pag);
+        $ativo=preg_replace('/[^0-9]/is', '', $ativo);
+        if(!is_numeric($limite)||!is_numeric($pag)||!is_numeric($ativo)){
+            $limite=20;
+            $pag=1;
+            $ativo=2;
+        }
         if ($pag==1) {
 
+            
             $LIMIT="LIMIT $limite";
+           
 
         } elseif ($pag!=1||$pag>0){
 
             $PontoPartida=(($pag-1)*$limite);
 
             $LIMIT="LIMIT $PontoPartida , $limite";
+         
 
         }
         if($ativo==2){
 
             $WHERE="";
+        
+        }else{
 
-        }elseif($ativo==1){
-
-            $WHERE="WHERE status=$ativo";
-
-        }elseif($ativo==0){
-
-            $WHERE="WHERE status=$ativo";
-
+            $WHERE="WHERE status=:ativo";
+            $arg[]=['key'=>':ativo',"value"=>$ativo];
         }
 
         $sql="SELECT * FROM clientes $WHERE $LIMIT";
-        return $this->connection->query($sql)->fetchAll();
+        
+        return $this->connection->query($sql,$arg)->fetchAll();
 
     }
 

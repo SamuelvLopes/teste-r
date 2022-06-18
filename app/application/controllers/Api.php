@@ -5,16 +5,18 @@ class Api extends CI_Controller {
 
 	public function index()
 	{
-		echo 'api mensagem';
+		echo 'api is online';
 	}
 	public function cliente()
 	{
 		
-		//$rota= "cliente/cadastro"; -ok
-		//$rota= "cliente/1"; -ok
-		//$rota= "cliente/alterar/1"; -ok
-		//$rota= "cliente/excluir/1"; -ok
+		//$rota= "cliente/cadastro"; 
+		//$rota= "cliente/1"; 
+		//$rota= "cliente/alterar/1"; 
+		//$rota= "cliente/excluir/1"; 
 		//$rota= "cliente/pag/1(N PAGINA)/20(MAXIMO DE PAGINAS)/2(ATIVO E INATIVO)" 
+		//$rota= "cliente/contato/1" 
+		
 
 		$rota=explode('/',$_SERVER["REQUEST_URI"]);
 
@@ -87,6 +89,7 @@ class Api extends CI_Controller {
 						}
 					
 					break;
+
 					case 'excluir':
 						if(!is_numeric($rota[count($rota)-1])){
 							echo json_encode(['retorno'=>'erro','motivo'=>'ID invalido']); 
@@ -103,9 +106,22 @@ class Api extends CI_Controller {
 						}
 
 					break;
+
+					case 'contato':
+
+						echo json_encode($this->cliente->ListarContatos($rota[count($rota)-1]));
+
+
+					break;
+
 					case 'cliente':
+
 						echo json_encode($this->cliente->FiltrarPorId($rota[count($rota)-1]));
-					break;		
+
+					break;
+					default:
+						echo json_encode(['retorno'=>'erro','motivo'=>'rota invalida']);
+					break;	
 				
 				}
 
@@ -120,4 +136,5 @@ class Api extends CI_Controller {
 		
 
 	}
+	
 }
