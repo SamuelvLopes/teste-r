@@ -10,19 +10,30 @@ class Api extends CI_Controller {
 	public function cliente()
 	{
 		
-		//$rota="cliente/cadastro"; -ok
-		//$rota="cliente/1"; -ok
-		//$rota="cliente/alterar/1"; -ok
-		//$rota="cliente/excluir/1"; -ok
-		//$rota="cliente/pag/1(N PAGINA)/20(MAXIMO DE PAGINAS)/2(ATIVO E INATIVO)" 
+		//$rota= "cliente/cadastro"; -ok
+		//$rota= "cliente/1"; -ok
+		//$rota= "cliente/alterar/1"; -ok
+		//$rota= "cliente/excluir/1"; -ok
+		//$rota= "cliente/pag/1(N PAGINA)/20(MAXIMO DE PAGINAS)/2(ATIVO E INATIVO)" 
 
 		$rota=explode('/',$_SERVER["REQUEST_URI"]);
 
 		$dados=json_decode(file_get_contents('php://input'),true);
 		
-		if(intval($rota[count($rota)-1])==0){
-
+		if(isset($dados['cnpj'])){
 			
+			$dados['cnpj'] = preg_replace('/[^0-9]/is', '', $dados['cnpj']);
+			
+		}
+		if(intval($rota[count($rota)-1])==0){
+			//cadastro
+			if(!isset($dados['nome'])||!isset($dados['cnpj'])||!isset($dados['status'])||$dados['nome']==''||!is_numeric($dados['status'])){
+				echo json_encode(['retorno'=>'erro','motivo'=>'Faltam dados']);
+				exit();
+			}elseif(!$this->validacoes->is_cnpj($dados['cnpj'])){
+				echo json_encode(['retorno'=>'erro','motivo'=>'cnpj invalido']);
+				exit();
+			}
 			
 			if($this->cliente->FiltrarPorCnpj($dados['cnpj'])==null){
 				
@@ -30,9 +41,6 @@ class Api extends CI_Controller {
 
 					echo json_encode(['retorno'=>'sucesso','motivo'=>'cliente cadastrado com sucesso']);
 					
-
-				
-
 				}else{
 
 					echo json_encode(['retorno'=>'erro','motivo'=>'esta faltando dados']);
@@ -55,7 +63,17 @@ class Api extends CI_Controller {
 
 					case 'alterar':
 						
-							if($this->cliente->FiltrarPorCnpj($dados['cnpj'])==null){
+						if(!isset($dados['nome'])||!isset($dados['id'])||!isset($dados['cnpj'])||!isset($dados['status'])||$dados['nome']==''||$dados['id']==""||!is_numeric($dados['status'])){
+
+							echo json_encode(['retorno'=>'erro','motivo'=>'dados invalidos para alterar']);
+
+						}else{
+							if(!$this->validacoes->is_cnpj($dados['cnpj'])){
+								echo json_encode(['retorno'=>'erro','motivo'=>'cnpj invalido']);
+								exit();
+							}
+							if($this->cliente->FiltrarPorCnpj($dados['cnpj'],$dados['id'])==null){
+								
 								if($this->cliente->UpdateCliente($dados)){
 
 									echo json_encode(['retorno'=>'sucesso','motivo'=>'cliente atualizado com sucesso']);
@@ -66,10 +84,14 @@ class Api extends CI_Controller {
 								echo json_encode(['retorno'=>'erro','motivo'=>'esse cnpj ja esta cadastrado']);
 
 							}
-						
+						}
+					
 					break;
 					case 'excluir':
-						
+						if(!is_numeric($rota[count($rota)-1])){
+							echo json_encode(['retorno'=>'erro','motivo'=>'ID invalido']); 
+							exit();
+						}
 						if($this->cliente->DeleteCliente($rota[count($rota)-1])){
 
 							echo json_encode(['retorno'=>'sucesso','motivo'=>'cliente deletado com sucesso']); 
@@ -79,6 +101,7 @@ class Api extends CI_Controller {
 							echo json_encode(['retorno'=>'erro','motivo'=>'nao foi possivel deletar o cliente']); 
 
 						}
+
 					break;
 					case 'cliente':
 						echo json_encode($this->cliente->FiltrarPorId($rota[count($rota)-1]));

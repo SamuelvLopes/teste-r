@@ -53,11 +53,20 @@
 
     }
 
-    public function FiltrarPorCnpj($cnpj){
-
-        $sql="SELECT * FROM CLIENTES WHERE CLIENTES.cnpj=:cnpj";
-
+    public function FiltrarPorCnpj($cnpj,$id=0){
         $arg=[];
+
+        if($id!=0){
+
+            $where2="and id!=:id";
+            $arg[]=['key'=>':id',"value"=>$id];
+
+        }else{
+            $where2="";
+        }
+
+        $sql="SELECT * FROM CLIENTES WHERE CLIENTES.cnpj=:cnpj $where2";
+        
         $arg[]=['key'=>':cnpj',"value"=>$cnpj];
 
         return $this->connection->query($sql,$arg)->fetchAll();
