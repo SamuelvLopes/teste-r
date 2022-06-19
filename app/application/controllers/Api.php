@@ -345,7 +345,9 @@ class Api extends CI_Controller {
 
 
 				switch($rota[count($rota)-2]){
-
+                                        case 'pesquisar':
+                                            echo json_encode($this->cliente->Pesquisar($dados['dado']));
+                                        break;
 					case 'alterar':
 						
 						if(!isset($dados['nome'])||!isset($dados['id'])||!isset($dados['cnpj'])||!isset($dados['status'])||$dados['nome']==''||$dados['id']==""||!is_numeric($dados['status'])){
