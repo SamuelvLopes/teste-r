@@ -28,7 +28,8 @@ class Api extends CI_Controller {
 		
 		$rota=explode('/',$_SERVER["REQUEST_URI"]);
 		$dados=json_decode(file_get_contents('php://input'),true);
-
+                                        
+                                        
 
 		
 		if(isset($dados['cpf'])){
