@@ -1,6 +1,8 @@
 <?php
 
     class Cliente extends CI_Model {
+
+        
     public function DeleteCliente($id){
 
         $sql="
