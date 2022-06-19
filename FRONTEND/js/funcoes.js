@@ -1,4 +1,5 @@
 const url_cadastrar_cliente="http://localhost/cc/app/api/cliente/cadastro";
+const url_pesquisar_cliente="http://localhost/cc/app/api/cliente/pesquisar/1";
 
 //mascara cnpj
 $(document).ready(function(){	
@@ -91,4 +92,46 @@ function notificar_user(retorno,motivo){
     console.log('o motivo é '+ motivo);
     
     document.getElementById('model_notificao').click();
+}
+
+//carregar pagina
+function carregar_pagina_clientes(pag){
+    
+}
+
+//construir paginacao
+function carregar_paginacao(){
+    
+}
+//atualizar o data
+function atualizar_pesquisa_cliente(valor){
+   
+    let dados={dado:valor};
+    (async () => {
+            const rawResponse = await fetch(url_pesquisar_cliente, {
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(dados)
+            });
+            const content = await rawResponse.json();
+            content.forEach(add_dados);
+           
+    })();
+    
+}
+
+function add_dados(retorno){
+       dados[retorno['titulo']+" : "+retorno['return']]=null;
+       
+}
+
+//pesquisar
+
+function pesquisar_cliente(valor){
+    
+    console.log('valor',valor)
+    
 }
