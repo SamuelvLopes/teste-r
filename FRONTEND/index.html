@@ -37,10 +37,73 @@
             </ul>
           </div>
           <div id="cliente" class="col s12">
+              <div class="row">
+                <div class="col s12">
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <i class="material-icons prefix">search</i>
+                      <input type="text" id="autocomplete-input" class="autocomplete">
+                      <label for="autocomplete-input">Pesquisar</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
+            <table class="highlight striped">
+                <thead>
+                  <tr>
+                      <th>Id</th>
+                      <th>Nome</th>
+                      <th>Cnpj</th>
+                      <th>Status</th>
+                      <th>Operações</th>
+                  </tr>
+                </thead>
 
-            Test 1
-            
+                <tbody>
+                  <tr>
+                    <td>Alvin</td>
+                    <td>Eclair</td>
+                    <td>$0.87</td>
+                    <td>
+                            <span class="new badge green" data-badge-caption="Ativo"></span>
+                            <span class="new badge red" data-badge-caption="Inativo"></span>
+                    </td>
+                    <td>
+                        <a class="btn-floating btn-small yellow"><i class="material-icons">edit</i></a>
+                        <a class="btn-floating btn-small red"><i class="material-icons">delete</i></a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Alan</td>
+                    <td>Jellybean</td>
+                    <td>$3.76</td>
+                    <td>$3.76</td>
+                    <td>$7.00</td>
+                  </tr>
+                  <tr>
+                    <td>Jonathan</td>
+                    <td>Lollipop</td>
+                    <td>$7.00</td>
+                    <td>$7.00</td>
+                    <td>$7.00</td>
+                  </tr>
+                </tbody>
+               
+            </table>
+                <center>
+                  <ul id='paginacao_div' class="pagination">
+                      <li class="disabled"><a href="#!" onclick="console.log('antes')"><i class="material-icons">chevron_left</i></a></li>
+                     <li class="active"><a href="#!">1</a></li>
+                     <li class="waves-effect"><a href="#!">2</a></li>
+                     <li class="waves-effect"><a href="#!">3</a></li>
+                     <li class="waves-effect"><a href="#!">4</a></li>
+                     <li class="waves-effect"><a href="#!">5</a></li>
+                     <li class="waves-effect"><a href="#!">6</a></li>
+                     <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+                  </ul>
+
+                </center>
           </div>
           <div id="cadastro_cli" class="col s12">
             
