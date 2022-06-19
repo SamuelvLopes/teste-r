@@ -32,3 +32,44 @@ $("#cpf").on("blur", function(){
   
     } 
 });
+
+//ação de cadastrar cliente
+$("#cadastrar_cliente").on("click", function(){
+    
+  if($("#nome").val()==""){
+      alert('O nome está vazio');
+      return;
+  }
+  if($("#cnpj").val()==""){
+      alert('O cnpj está vazio');
+      return;
+  }
+
+
+
+  console.log($("#status").val());
+
+
+
+  $.ajax({
+    //URL@ALTERAR
+    url : "cadastrar.php",
+    type : 'post',
+    data : {
+         nome : "Maria Fernanda",
+         salario :'3500'
+    },
+    beforeSend : function(){
+         $("#resultado").html("ENVIANDO...");
+    }
+})
+.done(function(msg){
+    $("#resultado").html(msg);
+})
+.fail(function(jqXHR, textStatus, msg){
+    alert(msg);
+});
+  
+
+  
+});

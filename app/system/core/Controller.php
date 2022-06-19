@@ -86,9 +86,6 @@ class CI_Controller {
 		$this->load =& load_class('Loader', 'core');
 		$this->load->initialize();
 		log_message('info', 'Controller Class Initialized');
-		$lang_select=$this->lib->what_lang();
-		
-		$this->lang->load($lang_select[0],$lang_select[1]);
 	}
 
 	// --------------------------------------------------------------------

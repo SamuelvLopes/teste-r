@@ -5,11 +5,9 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
-		
-		$this->load->view('welcome_message');
 		foreach($this->connection->query("SELECT * FROM pao") as $linha){
 		
-				//var_dump($this -> lang -> line('title'));
+				var_dump($linha);
 				echo'<hr>';
 
 				}
