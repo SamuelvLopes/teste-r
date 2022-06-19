@@ -14,12 +14,11 @@ $(document).ready(function(){
 
 $("#cnpj").on("blur", function(){
   let cnpj_value = $(this).val();
-
-  if(jsbrasil.validateBr.cnpj(cnpj_value)) {
-      alert("cnpj Válido");
-  } else {
-    alert("cnpj inválido")
-  }
+  
+  if(!jsbrasil.validateBr.cnpj(cnpj_value)) {
+      alert("cnpj inválido");
+    $("#cnpj").val('');
+  } 
 });
 
 
@@ -30,9 +29,10 @@ $(document).ready(function(){
 $("#cpf").on("blur", function(){
   let cpf_value = $(this).val();
 
-  if(jsbrasil.validateBr.cpf(cpf_value)) {
-      alert("cpf Válido");
-  } else {
-    alert("cpf inválido")
-  }
+  if(!jsbrasil.validateBr.cpf(cpf_value)) {
+    
+      alert("cpf inválido");
+      $("#cpf").val('');
+  
+    } 
 });
