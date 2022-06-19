@@ -1,3 +1,5 @@
+const url_cadastrar_cliente="http://localhost/cc/app/api/cliente/cadastro";
+
 //mascara cnpj
 $(document).ready(function(){	
   $("#cnpj").mask("99.999.999/9999-99");
@@ -36,40 +38,57 @@ $("#cpf").on("blur", function(){
 //ação de cadastrar cliente
 $("#cadastrar_cliente").on("click", function(){
     
-  if($("#nome").val()==""){
+  if($("#nome").val()===""){
       alert('O nome está vazio');
       return;
   }
-  if($("#cnpj").val()==""){
+  if($("#cnpj").val()===""){
       alert('O cnpj está vazio');
       return;
   }
+  var ativo;
+  
+if($('#status').is(':checked')===true){
+    ativo=1;
+}else{
+    ativo=0;
+}
+
+var dados={
+    nome:$("#nome").val(),
+    cnpj:$("#cnpj").val(),
+    status:ativo
+};
 
 
 
-  console.log($("#status").val());
-
-
-
-  $.ajax({
-    //URL@ALTERAR
-    url : "cadastrar.php",
-    type : 'post',
-    data : {
-         nome : "Maria Fernanda",
-         salario :'3500'
+(async () => {
+  const rawResponse = await fetch(url_cadastrar_cliente, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
     },
-    beforeSend : function(){
-         $("#resultado").html("ENVIANDO...");
-    }
-})
-.done(function(msg){
-    $("#resultado").html(msg);
-})
-.fail(function(jqXHR, textStatus, msg){
-    alert(msg);
-});
+    body: JSON.stringify(dados)
+  });
+  const content = await rawResponse.json();
+  notificar_user(content.retorno,content.motivo);
   
+})();
 
+$("#cnpj").val("");
+$("#nome").val("");
   
 });
+
+//notificar do retorno
+function notificar_user(retorno,motivo){
+    
+    document.getElementById('titulo_alerta').innerHTML=retorno;
+    document.getElementById('texto_alerta').innerHTML=motivo;
+    
+    console.log('o retorno é '+ retorno);
+    console.log('o motivo é '+ motivo);
+    
+    document.getElementById('model_notificao').click();
+}
