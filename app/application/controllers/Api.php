@@ -3,9 +3,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Api extends CI_Controller {
 
+	
+		
+	
+
+	
 	public function index()
 	{
 		echo 'api is online';
+		//if(!($this->login->is_authenticated()&&$this->login->is_accessible_class(__CLASS__))){
+		//	exit();
+		//}
 	}
 	public function Contato()
 	{
