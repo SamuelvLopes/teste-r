@@ -34,7 +34,11 @@ class Api extends CI_Controller {
 		if(intval($rota[count($rota)-1])==0){
 			//cadastro
 			if(!isset($dados['cpf'])||!isset($dados['email'])||!isset($dados['nome'])||$dados['nome']==""||$dados['email']==""||$dados['cpf']==""){
-
+				if($rota[count($rota)-1]=="semcliente"){
+					
+					echo json_encode($this->contato->ContatoScli());
+					exit();
+				}
 				echo json_encode(['retorno'=>'erro','motivo'=>'esta faltando dados']);
 				exit();
 				

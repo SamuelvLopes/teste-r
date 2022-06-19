@@ -123,7 +123,14 @@
     }
 
 
+    public function ContatoScli(){
 
+        $sql="select * from contato where isnull(id_cliente)";
+        
+        
+        return $this->connection->query($sql)->fetchAll();
+
+    }
     public function ExcluirContato($id){
 
 
@@ -179,6 +186,7 @@
         return $this->connection->query($sql,$arg)->fetchAll();
 
     }
+
 
 
 
