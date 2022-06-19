@@ -1,7 +1,26 @@
 <?php
 
     class Cliente extends CI_Model {
-
+    public function PesquisarId($valor){
+        
+        $valor=strtoupper($valor);
+        $sql="
+        select id from clientes where UPPER(status) like :valor1
+        union
+        select id from clientes where UPPER(cnpj) like :valor2
+        union
+        select id from clientes where UPPER(id) like :valor3
+        union
+        select id from clientes where UPPER(nome) like :valor4
+        ";
+        
+        $arg=[];
+        $arg[]=['key'=>':valor1',"value"=>'%'.$valor.'%'];
+        $arg[]=['key'=>':valor2',"value"=>'%'.$valor.'%'];
+        $arg[]=['key'=>':valor3',"value"=>'%'.$valor.'%'];
+        $arg[]=['key'=>':valor4',"value"=>'%'.$valor.'%'];
+        return $this->connection->query($sql,$arg)->fetchAll();
+    }
     public function Pesquisar($valor){
         
         $valor=strtoupper($valor);
