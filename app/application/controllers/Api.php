@@ -345,6 +345,19 @@ class Api extends CI_Controller {
 
 
 				switch($rota[count($rota)-2]){
+                                        case 'busca':
+                                            
+                                            $cli=[];
+                                            
+                                            foreach ($this->cliente->PesquisarId($dados['dado']) as $linha){
+                                                
+                                                array_push($cli,$this->cliente->FiltrarPorId($linha['id'])[0]);
+                                            
+                                            }
+                                            
+                                            echo json_encode($cli);
+                                            
+                                        break;
                                         case 'pesquisar':
                                             echo json_encode($this->cliente->Pesquisar($dados['dado']));
                                         break;
