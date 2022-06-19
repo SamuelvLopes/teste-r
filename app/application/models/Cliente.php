@@ -2,7 +2,26 @@
 
     class Cliente extends CI_Model {
 
+    public function Pesquisar($valor){
         
+        $valor=strtoupper($valor);
+        $sql="
+        select 'status' as 'titulo',status as 'return' from clientes where UPPER(status) like :valor1
+        union
+        select 'cnpj' as 'titulo',cnpj as 'return' from clientes where UPPER(cnpj) like :valor2
+        union
+        select 'id' as 'titulo',id as 'return' from clientes where UPPER(id) like :valor3
+        union
+        select 'nome' as 'titulo',nome as 'return' from clientes where UPPER(nome) like :valor4
+        ";
+        
+        $arg=[];
+        $arg[]=['key'=>':valor1',"value"=>'%'.$valor.'%'];
+        $arg[]=['key'=>':valor2',"value"=>'%'.$valor.'%'];
+        $arg[]=['key'=>':valor3',"value"=>'%'.$valor.'%'];
+        $arg[]=['key'=>':valor4',"value"=>'%'.$valor.'%'];
+        return $this->connection->query($sql,$arg)->fetchAll();
+    }    
     public function DeleteCliente($id){
 
         $sql="
