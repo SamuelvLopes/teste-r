@@ -51,7 +51,8 @@
     public function DeleteCliente($id){
 
         $sql="
-        DELETE clientes,contato FROM clientes
+        SET foreign_key_checks = 0;
+        DELETE contato,clientes FROM clientes
         LEFT JOIN contato ON clientes.id = contato.id_cliente OR clientes.status=0 where clientes.id=:id
         ";
         
