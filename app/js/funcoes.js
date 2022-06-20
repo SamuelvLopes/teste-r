@@ -746,7 +746,8 @@ $("#altera_cadastra_contato").on("click", function(){
      document.getElementById('altera_id_cliente').value='';
      document.getElementById('altera_email').value='';
      document.getElementById('altera_nome_contato').value='';
-     
+
+     document.getElementById('botao_menu_contato').click();
      
      
      
