@@ -204,7 +204,7 @@
     <div class="col s12">
       <ul class="tabs">
         <li class="tab col s3"><a class="active" id='botao_menu_contato' href="#test1">Contatos</a></li>
-        <li class="tab col s3"><a href="#test2">Alterar Contato</a></li>
+        <li class="tab col s3"><a href="#test2" id='alterar_contato_menu'>Alterar Contato</a></li>
         <li class="tab col s3"><a href="#test3">Cadastrar Contato</a></li>
         
       </ul>
@@ -263,24 +263,24 @@
         
         <div class="input-field col s6">
           <input id="altera_nome_contato" type="text" class="validate">
-          <label for="altera_nome_contato">Nome</label>
+          <label id='label_altera_nome_contato' for="altera_nome_contato">Nome</label>
         </div>
          <div class="input-field col s6">
           <input id="altera_email" type="text" class="validate">
-          <label for="altera_email">Email</label>
+          <label id='label_altera_email' for="altera_email">Email</label>
         </div>
          <div class="input-field col s6">
           <input id="altera_cpf" type="text" class="validate">
-          <label for="altera_cpf">CPF</label>
+          <label id='label_altera_cpf' for="altera_cpf">CPF</label>
         </div>
         <div class="input-field col s6">
           <input id="altera_id_cliente" type="number" class="validate">
-          <label for="altera_id_cliente">ID CLIENTE</label>
+          <label id='label_altera_id_cliente' for="altera_id_cliente">ID CLIENTE</label>
         </div>
       </div>
         <p class='center' id='altera_nome_do_cliente'></p>
         <center>
-           <button class="btn waves-effect waves-light" id='altera_cadastra_contato' id name="action">Alterar
+           <button class="btn waves-effect waves-light" type='button' id='altera_cadastra_contato'>Alterar
              <i class="material-icons right">send</i>
            </button>
         </center>

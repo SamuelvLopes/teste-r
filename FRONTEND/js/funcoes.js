@@ -10,6 +10,7 @@ const url_buscar_contato="http://localhost/cc/app/api/contato/busca/1";
 const url_deletar_um_contato="http://localhost/cc/app/api/contato/excluir/";
 const url_buscar_um_contato="http://localhost/cc/app/api/contato/";
 const url_cadastrar_um_contato="http://localhost/cc/app/api/contato/cadastro";
+const url_alterar_um_contato="http://localhost/cc/app/api/contato/alterar/";
 //mascara cnpj
 $(document).ready(function(){	
   $("#cnpj").mask("99.999.999/9999-99");
@@ -342,9 +343,17 @@ function montar_row_cli(linha){
 
 //editar cliente
 var cliente_editando=0;
+
 function editar_cliente(id){
    window.cliente_editando=id;
+   
+   document.getElementById('altera_nome_contato').disabled=true;
+   document.getElementById('altera_email').disabled=true;
+   document.getElementById('altera_cpf').disabled=true;
+   document.getElementById('altera_id_cliente').disabled=true;
+   
    document.getElementById('altera_cliente_menu').click(); 
+   
    
    preencher_alterar(id);
 }
@@ -384,7 +393,15 @@ function preencher_alterar(id){
 }
 //limpar alterar
 function limpa_alterar(){
-    
+            window.contato_alteracao=0;
+            document.getElementById('altera_nome_contato').disabled=true;
+            document.getElementById('altera_email').disabled=true;
+            document.getElementById('altera_cpf').disabled=true;
+            document.getElementById('altera_id_cliente').disabled=true;
+            document.getElementById('altera_nome_contato').value="";
+            document.getElementById('altera_email').value="";
+            document.getElementById('altera_cpf').value="";
+            document.getElementById('altera_id_cliente').value="";
             window.cliente_editando=0;
             document.getElementById('altera_nome').disabled=true;
             document.getElementById('altera_cnpj').disabled=true;
@@ -411,7 +428,7 @@ function deletar_cliente(id){
            
     })();
     pesquisar_cliente('');
-    limpa_alterar()
+    limpa_alterar();
 }
 function atualiza_contador_cliente(){
 	
@@ -551,8 +568,8 @@ function montar_row_co(linha){
 }
 //edita contato
 function editar_contato(id){
-    
-    console.log(id);
+    window.contato_alteracao=id;
+    preencher_altera_contato(id);
     
 }
 //deletar contato
@@ -618,3 +635,93 @@ $("#cadastra_contato").on("click", function(){
        atualizar_all();
     
 });
+
+//acesso ao alterar contato
+$("#alterar_contato_menu").on("click", function(){
+    
+    if(window.contato_alteracao==0){
+        alert('é necessario escolher um contato primeiro');
+        limpa_alterar();
+        
+    }
+    
+});
+// botão alterar
+var contato_alteracao=0;
+$("#altera_cadastra_contato").on("click", function(){
+    
+    
+     if(document.getElementById('altera_nome_contato').value==''||document.getElementById('altera_email').value==''||document.getElementById('altera_cpf').value==''||document.getElementById('altera_id_cliente').value==''){
+        
+        alert('preencha todos os campos');
+         return;
+         
+     }
+     
+     let dados={
+         id:window.contato_alteracao,
+         cpf:document.getElementById('altera_cpf').value,
+         id_cliente:document.getElementById('altera_id_cliente').value,
+         email:document.getElementById('altera_email').value,
+         nome:document.getElementById('altera_nome_contato').value
+         
+         
+     };
+     
+     
+     (async () => {
+            const rawResponse = await fetch(url_alterar_um_contato+window.contato_alteracao, {
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(dados)
+            });
+            const content = await rawResponse.json();
+            notificar_user(content['retorno'],content['motivo']);
+           
+    })();
+     window.contato_alteracao=0;
+     document.getElementById('altera_cpf').value='';
+     document.getElementById('altera_id_cliente').value='';
+     document.getElementById('altera_email').value='';
+     document.getElementById('altera_nome_contato').value='';
+     
+     
+     
+     
+     
+    
+    
+});
+
+function preencher_altera_contato(id){
+    
+    document.getElementById('alterar_contato_menu').click();
+    let dados={dado:'valor'};
+    (async () => {
+            const rawResponse = await fetch(url_buscar_um_contato+id, {
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(dados)
+            });
+            const content = await rawResponse.json();
+            console.log(content);
+            document.getElementById('altera_nome_contato').value=content[0].nome_contato;
+            document.getElementById('label_altera_nome_contato').setAttribute("class", "active");
+            document.getElementById('altera_email').value=content[0].email_contato;
+            document.getElementById('label_altera_email').setAttribute("class", "active");
+            document.getElementById('altera_cpf').value=content[0].cpf.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+            document.getElementById('label_altera_cpf').setAttribute("class", "active");
+            document.getElementById('altera_id_cliente').value=content[0].id_cliente;
+            document.getElementById('label_altera_id_cliente').setAttribute("class", "active");
+            //notificar_user(content['retorno'],content['motivo']);
+           
+    })();
+    
+    
+}
