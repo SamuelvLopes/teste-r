@@ -118,7 +118,9 @@ $("#id_cliente").on("blur", function(){
 
 //valida email
 $("#email").on("blur", function(){
-    
+    if($("#email").val()==''){
+        return;
+    }
     if(!validaEmail($("#email").val())){
         
         alert('E-mail invalido');
