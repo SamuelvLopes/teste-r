@@ -12,9 +12,14 @@ https://teste-r.pratics.com.br/
 - PHP Version 8.1.4
 - 10.4.24-MariaDB
 
-# PostMan end-point
+# Principais Rotas Cliente
+![image](https://user-images.githubusercontent.com/51290633/174581214-4846841a-091f-42e4-9211-99f0d65c3ca5.png)
+#Principais Rotas Contato
+![image](https://user-images.githubusercontent.com/51290633/174581425-4f3b115a-8420-44cf-8ba3-31a7779057e9.png)
+
+# Detalhamento das rotas com testes 
 - https://www.getpostman.com/collections/71153970f37f4542d43f
-  (adaptar as urls p/ "localhost" ou "dominio.publico")
+- (adaptar as urls a depender da pasta raiz do projeto)
   
 # estrutura de pastas
 
