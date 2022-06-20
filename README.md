@@ -1,4 +1,6 @@
 # desafio-r
+##acesso externo
+https://teste-r.pratics.com.br/
 
 ## Modelo do Banco
 ![png](https://user-images.githubusercontent.com/51290633/174152549-5ae94051-7e3e-4a57-b100-eb381916c1bb.png)
