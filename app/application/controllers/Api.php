@@ -345,6 +345,9 @@ class Api extends CI_Controller {
 
 
 				switch($rota[count($rota)-2]){
+                                        case 'qtd':
+                                         echo json_encode($this->cliente->getCountCli());
+                                        break;
                                         case 'busca':
                                             
                                             $cli=[];
