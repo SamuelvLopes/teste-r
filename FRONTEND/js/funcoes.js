@@ -9,7 +9,7 @@ const url_deletar_um_cliente="http://localhost/cc/app/api/cliente/excluir/";
 const url_buscar_contato="http://localhost/cc/app/api/contato/busca/1";
 const url_deletar_um_contato="http://localhost/cc/app/api/contato/excluir/";
 const url_buscar_um_contato="http://localhost/cc/app/api/contato/";
-
+const url_cadastrar_um_contato="http://localhost/cc/app/api/contato/cadastro";
 //mascara cnpj
 $(document).ready(function(){	
   $("#cnpj").mask("99.999.999/9999-99");
@@ -526,3 +526,43 @@ function deletar_contato(id){
     
     
 }
+
+//cadastro de contato
+$("#cadastra_contato").on("click", function(){
+       
+    if(document.getElementById('nome_contato').value==''||document.getElementById('email').value==''||document.getElementById('cpf').value==''||document.getElementById('id_cliente').value==''){
+        
+        
+        alert('preencha todos os campos')
+        return;
+    }
+    let dados={
+        cpf:document.getElementById('cpf').value,
+        nome:document.getElementById('nome_contato').value,
+        email:document.getElementById('email').value,
+        id_cliente:document.getElementById('id_cliente').value
+            };
+            
+        
+    (async () => {
+            const rawResponse = await fetch(url_cadastrar_um_contato, {
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(dados)
+            });
+            const content = await rawResponse.json();
+            notificar_user(content['retorno'],content['motivo']);
+           
+    })();
+    document.getElementById('cpf').value='';
+    document.getElementById('nome_contato').value='';
+    document.getElementById('email').value='';
+    document.getElementById('id_cliente').value='';
+    document.getElementById('nome_do_cliente').value='';
+    document.getElementById('botao_menu_contato').click();
+       atualizar_all();
+    
+});
