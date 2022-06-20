@@ -73,6 +73,45 @@ $("#altera_cpf").on("blur", function(){
     } 
 });
 
+//valida altera id cliente
+$("#altera_id_cliente").on("blur", function(){
+    let id=$("#altera_id_cliente").val();
+    if(id==""){
+        
+        return;
+        
+    }
+    
+     let dados={dado:''};
+    (async () => {
+            const rawResponse = await fetch(url_ler_um_cliente+id, {
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(dados)
+            });
+            
+            const content = await rawResponse.json();
+            if(content.length==0){
+                alert('esse cliente não existe');
+                $("#altera_id_cliente").val('');
+                document.getElementById('altera_nome_do_cliente').innerHTML='';
+                return;
+                
+            }
+            document.getElementById('altera_nome_do_cliente').innerHTML=content[0].nome;
+           
+           
+            
+           
+    })();
+    
+    
+    
+    
+});
 //valida id_cliente do contato
 
 $("#id_cliente").on("blur", function(){
@@ -115,7 +154,20 @@ $("#id_cliente").on("blur", function(){
 });
 
 
-
+//valida email alterar
+$("#altera_email").on("blur", function(){
+    if($("#altera_email").val()==''){
+        return;
+    }
+    if(!validaEmail($("#altera_email").val())){
+        
+        alert('E-mail invalido');
+        $("#altera_email").val('');
+        
+    }
+    
+    
+});
 //valida email
 $("#email").on("blur", function(){
     if($("#email").val()==''){
