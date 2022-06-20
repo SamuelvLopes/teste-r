@@ -5,6 +5,7 @@ const url_buscar_qtd="http://localhost/cc/app/api/cliente/qtd/1";
 const url_ler_um_cliente="http://localhost/cc/app/api/cliente/";
 const url_alterar_um_cliente="http://localhost/cc/app/api/cliente/alterar/";
 const url_deletar_um_cliente="http://localhost/cc/app/api/cliente/excluir/";
+const url_recupera_contato_cliente="http://localhost/cc/app/api/cliente/contato/";
 
 const url_buscar_contato="http://localhost/cc/app/api/contato/busca/1";
 const url_deletar_um_contato="http://localhost/cc/app/api/contato/excluir/";
@@ -247,6 +248,7 @@ function notificar_user(retorno,motivo){
     
    
 }
+
 //atualiza td
 function atualizar_all(){
      atualiza_contador_cliente();
@@ -335,12 +337,67 @@ function montar_row_cli(linha){
                     <td>
                         <a class="btn-floating btn-small yellow" onclick='editar_cliente(${linha.id})'><i class="material-icons">edit</i></a>
                         <a class="btn-floating btn-small red" onclick='deletar_cliente(${linha.id})'><i class="material-icons">delete</i></a>
+                        <a class="btn-floating btn-small green" onclick='vizualizar_contatos_cliente(${linha.id})'><i class="material-icons">account_circle</i></a>
+                   
                     </td>
                   </tr>`;
     document.getElementById('tabela_cliente').innerHTML=row+document.getElementById('tabela_cliente').innerHTML;
 
 }
+function vizualizar_contatos_cliente(id){
+    
+    let dados={dado:'valor'};
+    (async () => {
+            const rawResponse = await fetch(url_recupera_contato_cliente+id, {
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(dados)
+            });
+            const content = await rawResponse.json();
+            window.linhas_de_contato='';
+        content.forEach(construir_modal)  ;
+        //notificar_user(content['retorno'],content['motivo']);
+        let table_html=`
 
+      <table>
+        <thead>
+          <tr>
+              <th>Id</th>
+              <th>Nome</th>
+              <th>CPF</th>
+              <th>Email</th>
+          </tr>
+        </thead>
+            ${window.linhas_de_contato}
+        <tbody>
+          
+        </tbody>
+      </table>
+
+`;   
+        notificar_user('contatos',table_html);
+    })();
+    
+    
+}
+var linhas_de_contato='';
+function construir_modal(item){
+    
+    
+    let row=`<tr>
+            <td>${item.id}</td>
+            <td>${item.nome_contato}</td>
+            <td>${item.cpf.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")}</td>
+            <td>${item.email_contato}</td>
+          </tr>
+
+        `;
+    window.linhas_de_contato=row+window.linhas_de_contato;
+    
+}
 //editar cliente
 var cliente_editando=0;
 
@@ -647,7 +704,9 @@ $("#alterar_contato_menu").on("click", function(){
     
 });
 // botão alterar
+
 var contato_alteracao=0;
+
 $("#altera_cadastra_contato").on("click", function(){
     
     
