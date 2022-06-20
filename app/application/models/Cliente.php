@@ -1,6 +1,13 @@
 <?php
 
     class Cliente extends CI_Model {
+        
+    public function getCountCli(){
+        
+        $sql="select count(*) as count from clientes";
+        
+        return $this->connection->query($sql)->fetchAll();
+    }
     public function PesquisarId($valor){
         
         $valor=strtoupper($valor);
