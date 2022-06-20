@@ -8,7 +8,14 @@ https://teste-r.pratics.com.br/
 - Desenvolvido utilizando como base o conceito de API R, a aplicação se comunica de forma totalmente a parte
 - Consumo de API externas para popular o banco
 
+# Ambiente
+- PHP Version 8.1.4
+- 10.4.24-MariaDB
 
+# PostMan end-point
+- https://www.getpostman.com/collections/71153970f37f4542d43f
+  (adaptar as urls localhost ou dominio.publico)
+  
 ## Modelo do Banco
 ![png](https://user-images.githubusercontent.com/51290633/174152549-5ae94051-7e3e-4a57-b100-eb381916c1bb.png)
 
