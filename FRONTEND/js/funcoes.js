@@ -3,6 +3,7 @@ const url_pesquisar_cliente="http://localhost/cc/app/api/cliente/pesquisar/1";
 const url_buscar_cliente="http://localhost/cc/app/api/cliente/busca/1";
 const url_buscar_qtd="http://localhost/cc/app/api/cliente/qtd/1";
 const url_ler_um_cliente="http://localhost/cc/app/api/cliente/";
+const url_alterar_um_cliente="http://localhost/cc/app/api/cliente/alterar/";
 
 //mascara cnpj
 $(document).ready(function(){	
@@ -162,7 +163,7 @@ function add_dados(retorno){
 //pesquisar
 var ultimo_valor_pesquisado='';
 function pesquisar_cliente(valor){
-    
+   
    let dados={dado:valor};
     (async () => {
             const rawResponse = await fetch(url_buscar_cliente, {
@@ -213,7 +214,7 @@ function montar_row_cli(linha){
 }
 
 //editar cliente
-let cliente_editando=0;
+var cliente_editando=0;
 function editar_cliente(id){
    window.cliente_editando=id;
    document.getElementById('altera_cliente_menu').click(); 
@@ -223,7 +224,10 @@ function editar_cliente(id){
 
 //preenche alterar
 function preencher_alterar(id){
-    console.log("ss");
+        document.getElementById('altera_nome').disabled=false;
+        document.getElementById('altera_cnpj').disabled=false;
+        document.getElementById('altera_status').disabled=false;
+        document.getElementById('altera_cliente').disabled=false;
     let dados={dado:''};
     (async () => {
             const rawResponse = await fetch(url_ler_um_cliente+id, {
@@ -293,4 +297,62 @@ $(window).on("load", function(){
    
 });
     
+$("#altera_cliente_menu").on("click", function(){
+    if(window.cliente_editando==0){
+        
+        alert('você não ainda não escolheu um cliente para editar');   
+
+        document.getElementById('altera_nome').disabled=true;
+        document.getElementById('altera_cnpj').disabled=true;
+        document.getElementById('altera_status').disabled=true;
+        document.getElementById('altera_cliente').disabled=true;
+  
+    }
     
+});
+
+$("#altera_cliente_botao").on("click", function(){
+     if(window.cliente_editando==0){
+        
+        alert('você não ainda não escolheu um cliente para editar');   
+        document.getElementById('cliente_menu').click();
+        return;
+     }
+     let status=0;
+     if(document.getElementById('altera_status').value=='on'){
+         status=1;
+     }
+     
+        
+       let dados={
+           id:window.cliente_editando,
+           nome:document.getElementById('altera_nome').value,
+           cnpj:document.getElementById('altera_cnpj').value,
+           status:status
+       };
+       
+       
+      
+    (async () => {
+            const rawResponse = await fetch(url_alterar_um_cliente+window.cliente_editando, {
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(dados)
+            });
+            const content = await rawResponse.json();
+            notificar_user(content['retorno'],content['motivo']);
+            document.getElementById('cliente_menu').click();
+            window.cliente_editando=0;
+            document.getElementById('altera_nome').disabled=true;
+            document.getElementById('altera_cnpj').disabled=true;
+            document.getElementById('altera_status').disabled=true;
+            document.getElementById('altera_cliente').disabled=true;
+            document.getElementById('altera_nome').value="";
+            document.getElementById('altera_cnpj').value="";
+            pesquisar_cliente('');
+    })();
+    
+});
