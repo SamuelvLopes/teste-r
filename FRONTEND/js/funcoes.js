@@ -71,6 +71,23 @@ $("#altera_cpf").on("blur", function(){
     } 
 });
 
+//valida email
+$("#email").on("blur", function(){
+    
+    if(!validaEmail($("#email").val())){
+        
+        alert('E-mail invalido');
+        $("#email").val('');
+        
+    }
+    
+    
+});
+function validaEmail(email) {
+  var regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+  return regex.test(email);
+}
+
 //ação de cadastrar cliente
 $("#cadastrar_cliente").on("click", function(){
     
