@@ -14,7 +14,16 @@ https://teste-r.pratics.com.br/
 
 # PostMan end-point
 - https://www.getpostman.com/collections/71153970f37f4542d43f
-  (adaptar as urls localhost ou dominio.publico)
+  (adaptar as urls p/ "localhost" ou "dominio.publico")
+  
+# estrutura de pastas
+
+## BD
+- guarda arquivos referentes a criação e população do bando de dados
+## APP
+- pasta onde há todo o projeto implementado(controllers,models,views,libraries)
+## FRONTEND
+- Utilizando os dados fornecidos pela API, a aplicação web funciona normalmente mesmo a parte da estrutura principal
   
 ## Modelo do Banco
 ![png](https://user-images.githubusercontent.com/51290633/174152549-5ae94051-7e3e-4a57-b100-eb381916c1bb.png)
