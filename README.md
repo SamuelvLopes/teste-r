@@ -2,6 +2,12 @@
 ## acesso externo
 https://teste-r.pratics.com.br/
 
+## obs
+- pattern Singleton(desafio-r/app/application/libraries/Connection.php) e MVC(projeto)
+- lib de idioma(pt|en)-https://teste-r.pratics.com.br/?lang=en
+- Desenvolvido utilizando como base o conceito de API R, a aplicação se comunica de forma totalmente a parte
+
+
 ## Modelo do Banco
 ![png](https://user-images.githubusercontent.com/51290633/174152549-5ae94051-7e3e-4a57-b100-eb381916c1bb.png)
 
