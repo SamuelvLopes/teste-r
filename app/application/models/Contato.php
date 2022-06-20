@@ -3,7 +3,12 @@
     class Contato extends CI_Model {
 
 
-
+    public function getCountCo(){
+        
+        $sql="select count(*) as count from contato";
+        
+        return $this->connection->query($sql)->fetchAll();
+    }
     public function FiltrarPorCpf($cpf,$id=0){
 
         if($id!=0){
