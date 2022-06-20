@@ -1,14 +1,14 @@
 <ul class="collapsible">
     <li>
-      <div class="collapsible-header" tabindex="0"><i class="material-icons">store</i>Cliente<span class="badge" id='qtd_clientes'>4</span></div>
+      <div class="collapsible-header" tabindex="0"><i class="material-icons">store</i><?=$this -> lang -> line('cliente')?><span class="badge" id='qtd_clientes'>4</span></div>
       <div class="collapsible-body">
         
         <div class="row">
           <div class="col s12">
             <ul class="tabs">
-              <li class="tab col s3"><a id='cliente_menu' class="active" href="#cliente">Clientes</a></li>
-              <li class="tab col s3"><a id='altera_cliente_menu' href="#altera_cliente">Alterar Cliente</a></li>
-              <li class="tab col s3"><a href="#cadastro_cli">Cadastro</a></li>
+              <li class="tab col s3"><a id='cliente_menu' class="active" href="#cliente"><?=$this -> lang -> line('clientes')?></a></li>
+              <li class="tab col s3"><a id='altera_cliente_menu' href="#altera_cliente"><?=$this -> lang -> line('alterar_cliente')?></a></li>
+              <li class="tab col s3"><a href="#cadastro_cli"><?=$this -> lang -> line('cadastrar_cliente')?></a></li>
             </ul>
           </div>
           <div id="cliente" class="col s12">
@@ -170,16 +170,16 @@
       </div>
     </li>
     <li>
-      <div class="collapsible-header" tabindex="0"><i class="material-icons">contacts</i>Contato<span class="badge"></span></div>
+      <div class="collapsible-header" tabindex="0"><i class="material-icons">contacts</i><?=$this -> lang -> line('contato')?><span class="badge"></span></div>
       <div class="collapsible-body">
       
       
       <div class="row">
     <div class="col s12">
       <ul class="tabs">
-        <li class="tab col s3"><a class="active" id='botao_menu_contato' href="#test1">Contatos</a></li>
-        <li class="tab col s3"><a href="#test2" id='alterar_contato_menu'>Alterar Contato</a></li>
-        <li class="tab col s3"><a href="#test3">Cadastrar Contato</a></li>
+        <li class="tab col s3"><a class="active" id='botao_menu_contato' href="#test1"><?=$this -> lang -> line('contatos')?></a></li>
+        <li class="tab col s3"><a href="#test2" id='alterar_contato_menu'><?=$this -> lang -> line('alterar_contato')?></a></li>
+        <li class="tab col s3"><a href="#test3"><?=$this -> lang -> line('cadastrar_contato')?></a></li>
         
       </ul>
     </div>
