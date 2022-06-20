@@ -10,6 +10,15 @@
 
 
   var dados={};
+  const node2 = document.getElementById('autocomplete-input2');
+        node2.addEventListener("keyup", function(event) {
+        if(event.key=='Enter'){
+        pesquisar_contato(document.getElementById('autocomplete-input2').value);
+        return;
+    }  
+            
+            
+        });
   const node = document.getElementById('autocomplete-input');
         node.addEventListener("keyup", function(event) {
          window.dados={};

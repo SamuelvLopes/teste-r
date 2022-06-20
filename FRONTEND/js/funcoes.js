@@ -119,7 +119,7 @@ $("#nome").val("");
 
 //notificar do retorno
 function notificar_user(retorno,motivo){
-    
+     atualizar_all();
     document.getElementById('titulo_alerta').innerHTML=retorno;
     document.getElementById('texto_alerta').innerHTML=motivo;
     
@@ -127,8 +127,16 @@ function notificar_user(retorno,motivo){
     console.log('o motivo é '+ motivo);
     
     document.getElementById('model_notificao').click();
+    
+   
 }
-
+//atualiza td
+function atualizar_all(){
+     atualiza_contador_cliente();
+	pesquisar_cliente('');
+	pesquisar_contato('');
+    
+}
 //carregar pagina
 function carregar_pagina_clientes(pag){
     
