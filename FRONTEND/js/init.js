@@ -24,6 +24,10 @@
        
          data: dados
        });
+       $('input.autocomplete2').autocomplete({
+       
+         data: dados
+       });
        document.getElementById('autocomplete-input').click();
        
 });

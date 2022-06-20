@@ -128,6 +128,19 @@ class Api extends CI_Controller {
 
 
 				switch($rota[count($rota)-2]){
+                                    case 'busca':
+                                            
+                                            $cli=[];
+                                            
+                                            foreach ($this->contato->PesquisarId($dados['dado']) as $linha){
+                                                
+                                                array_push($cli,$this->contato->FiltrarPorId($linha['id'])[0]);
+                                            
+                                            }
+                                            
+                                            echo json_encode($cli);
+                                            
+                                        break;
 				
 					case'contato':
 						
@@ -157,7 +170,7 @@ class Api extends CI_Controller {
 							echo json_encode(['retorno'=>'erro','motivo'=>'Contato nao existe']);
 						}elseif($this->contato->ExcluirContato($rota[count($rota)-1])){
 						
-							echo json_encode(['retorno'=>'sucesso','motivo'=>'cliente excluido com sucesso']);
+							echo json_encode(['retorno'=>'sucesso','motivo'=>'contato excluido com sucesso']);
 
 						}
 						

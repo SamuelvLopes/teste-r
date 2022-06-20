@@ -197,7 +197,73 @@
     </li>
     <li>
       <div class="collapsible-header" tabindex="0"><i class="material-icons">contacts</i>Contato<span class="badge">1</span></div>
-      <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+      <div class="collapsible-body">
+      
+      
+      <div class="row">
+    <div class="col s12">
+      <ul class="tabs">
+        <li class="tab col s3"><a class="active" href="#test1">Contatos</a></li>
+        <li class="tab col s3"><a href="#test2">Alterar Contato</a></li>
+        <li class="tab col s3"><a href="#test3">Cadastrar Contato</a></li>
+        
+      </ul>
+    </div>
+    <div id="test1" class="col s12">
+        <div class="row">
+        <div class="col s12">
+          <div class="row">
+            <div class="input-field col s12">
+              <i class="material-icons prefix">search</i>
+              <input type="text" id="autocomplete-input2" class="autocomplete">
+              <label for="autocomplete-input2">Pesquisar</label>
+            </div>
+          </div>
+        </div>
+      </div>
+        
+    <table class="highlight striped">
+                <thead>
+                  <tr>
+                      <th>Id</th>
+                      <th>Id do cliente</th>
+                      <th>Nome</th>
+                      <th>Email</th>
+                      <th>Cpf</th>
+                      <th>Operações</th>
+                  </tr>
+                </thead>
+
+                <tbody id="tabela_contato">
+				<tr>
+                    <td>66</td>
+                    <td>E Little York Rd Belen ME</td>
+                    <td>87.356.694/0001-82</td>
+                    <td>87.356.694/0001-82</td>
+                    <td>
+                        <span class="new badge red" data-badge-caption="Inativo"></span>
+                    </td>
+                    <td>
+                        <a class="btn-floating btn-small yellow" onclick="editar_cliente(66)"><i class="material-icons">edit</i></a>
+                        <a class="btn-floating btn-small red" onclick="deletar_cliente(66)"><i class="material-icons">delete</i></a>
+                    </td>
+                  </tr>
+				  </tbody>
+               
+            </table>
+    
+    </div>
+    <div id="test2" class="col s12">Test 2</div>
+    <div id="test3" class="col s12">Test 3</div>
+  </div>
+      
+      
+      
+      
+      
+      
+      
+      </div>
     </li>
   </ul>
 <!--AVISOS-->

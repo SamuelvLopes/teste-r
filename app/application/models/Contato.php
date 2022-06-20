@@ -2,7 +2,40 @@
 
     class Contato extends CI_Model {
 
+        
+        public function FiltrarPorId($id){
 
+        $sql="SELECT * FROM contato WHERE contato.id=:id";
+
+        $arg=[];
+        $arg[]=['key'=>':id',"value"=>$id];
+
+        return $this->connection->query($sql,$arg)->fetchAll();
+
+    }
+        public function PesquisarId($valor){
+        
+        $valor=strtoupper($valor);
+        $sql="
+        		select id from contato where UPPER(id) like :valor1
+        union
+		select id from contato where UPPER(id_cliente) like :valor2
+        union
+        select id from contato where UPPER(nome_contato) like :valor3
+        union
+        select id from contato where UPPER(email_contato) like :valor4
+        union
+        select id from contato where UPPER(cpf) like :valor5
+        ";
+        
+        $arg=[];
+        $arg[]=['key'=>':valor1',"value"=>'%'.$valor.'%'];
+        $arg[]=['key'=>':valor2',"value"=>'%'.$valor.'%'];
+        $arg[]=['key'=>':valor3',"value"=>'%'.$valor.'%'];
+        $arg[]=['key'=>':valor4',"value"=>'%'.$valor.'%'];
+        $arg[]=['key'=>':valor5',"value"=>'%'.$valor.'%'];
+        return $this->connection->query($sql,$arg)->fetchAll();
+    }
     public function getCountCo(){
         
         $sql="select count(*) as count from contato";

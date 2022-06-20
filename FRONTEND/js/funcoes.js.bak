@@ -7,7 +7,6 @@ const url_alterar_um_cliente="http://localhost/cc/app/api/cliente/alterar/";
 const url_deletar_um_cliente="http://localhost/cc/app/api/cliente/excluir/";
 
 const url_buscar_contato="http://localhost/cc/app/api/contato/busca/1";
-const url_deletar_um_contato="http://localhost/cc/app/api/contato/excluir/";
 //mascara cnpj
 $(document).ready(function(){	
   $("#cnpj").mask("99.999.999/9999-99");
@@ -311,7 +310,6 @@ $(window).on("load", function(){
    
    atualiza_contador_cliente();
 	pesquisar_cliente('');
-	pesquisar_contato('');
 	return;
    
    
@@ -394,7 +392,6 @@ function pesquisar_contato(valor){
               body: JSON.stringify(dados)
             });
             const content = await rawResponse.json();
-            document.getElementById('tabela_contato').innerHTML="";
             content.forEach(montar_row_co);
            
             
@@ -404,7 +401,7 @@ function pesquisar_contato(valor){
 }
 
 function montar_row_co(linha){
-    
+    console.log(linha);
     
     let row=`
                   <tr>
@@ -434,23 +431,6 @@ function editar_contato(id){
 //deletar contato
 function deletar_contato(id){
     
-   console.log(id);
-    let dados={dado:'valor'};
-    (async () => {
-            const rawResponse = await fetch(url_deletar_um_contato+id, {
-              method: 'POST',
-              headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(dados)
-            });
-            const content = await rawResponse.json();
-            notificar_user(content['retorno'],content['motivo']);
-           
-    })();
-    pesquisar_contato('');
-    limpa_alterar()
-    
+    console.log(id);
     
 }
