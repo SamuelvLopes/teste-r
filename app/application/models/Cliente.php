@@ -52,7 +52,7 @@
 
         $sql="
         DELETE clientes,contato FROM clientes
-        INNER JOIN contato ON clientes.id = contato.id_cliente OR clientes.status=0 where clientes.id=:id
+        LEFT JOIN contato ON clientes.id = contato.id_cliente OR clientes.status=0 where clientes.id=:id
         ";
         
         $arg=[];

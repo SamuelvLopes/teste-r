@@ -4,6 +4,7 @@ const url_buscar_cliente="http://localhost/cc/app/api/cliente/busca/1";
 const url_buscar_qtd="http://localhost/cc/app/api/cliente/qtd/1";
 const url_ler_um_cliente="http://localhost/cc/app/api/cliente/";
 const url_alterar_um_cliente="http://localhost/cc/app/api/cliente/alterar/";
+const url_deletar_um_cliente="http://localhost/cc/app/api/cliente/excluir/";
 
 //mascara cnpj
 $(document).ready(function(){	
@@ -219,7 +220,7 @@ function editar_cliente(id){
    window.cliente_editando=id;
    document.getElementById('altera_cliente_menu').click(); 
    
-   preencher_alterar(id)
+   preencher_alterar(id);
 }
 
 //preenche alterar
@@ -255,11 +256,36 @@ function preencher_alterar(id){
     console.log(id);
     
 }
-
+//limpar alterar
+function limpa_alterar(){
+    
+            window.cliente_editando=0;
+            document.getElementById('altera_nome').disabled=true;
+            document.getElementById('altera_cnpj').disabled=true;
+            document.getElementById('altera_status').disabled=true;
+            document.getElementById('altera_cliente').disabled=true;
+            document.getElementById('altera_nome').value="";
+            document.getElementById('altera_cnpj').value="";
+}
 //deletar cliente
 function deletar_cliente(id){
-    
-    
+    console.log(id);
+    let dados={dado:'valor'};
+    (async () => {
+            const rawResponse = await fetch(url_deletar_um_cliente+id, {
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(dados)
+            });
+            const content = await rawResponse.json();
+            notificar_user(content['retorno'],content['motivo']);
+           
+    })();
+    pesquisar_cliente('');
+    limpa_alterar()
 }
 
 //atualiza dados de contagem
@@ -318,17 +344,20 @@ $("#altera_cliente_botao").on("click", function(){
         document.getElementById('cliente_menu').click();
         return;
      }
-     let status=0;
-     if(document.getElementById('altera_status').value=='on'){
-         status=1;
-     }
-     
+     let ativo=0;
+   
+     if($('#altera_status').is(':checked')===true){
+    ativo=1;
+    }else{
+        ativo=0;
+    }
+
         
        let dados={
            id:window.cliente_editando,
            nome:document.getElementById('altera_nome').value,
            cnpj:document.getElementById('altera_cnpj').value,
-           status:status
+           status:ativo
        };
        
        
@@ -356,3 +385,5 @@ $("#altera_cliente_botao").on("click", function(){
     })();
     
 });
+
+

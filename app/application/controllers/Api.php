@@ -417,9 +417,10 @@ class Api extends CI_Controller {
 							echo json_encode(['retorno'=>'erro','motivo'=>'ID invalido']); 
 							exit();
 						}
-
-
-
+                                                if(($this->cliente->FiltrarPorId($rota[count($rota)-1]))==null){
+                                                    echo json_encode(['retorno'=>'erro','motivo'=>'esse cliente nao existe']); 
+							exit();
+                                                }
 						if($this->cliente->DeleteCliente($rota[count($rota)-1])){
 
 							echo json_encode(['retorno'=>'sucesso','motivo'=>'cliente deletado com sucesso']); 
