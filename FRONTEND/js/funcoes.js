@@ -8,6 +8,8 @@ const url_deletar_um_cliente="http://localhost/cc/app/api/cliente/excluir/";
 
 const url_buscar_contato="http://localhost/cc/app/api/contato/busca/1";
 const url_deletar_um_contato="http://localhost/cc/app/api/contato/excluir/";
+const url_buscar_um_contato="http://localhost/cc/app/api/contato/";
+
 //mascara cnpj
 $(document).ready(function(){	
   $("#cnpj").mask("99.999.999/9999-99");
@@ -70,6 +72,49 @@ $("#altera_cpf").on("blur", function(){
   
     } 
 });
+
+//valida id_cliente do contato
+
+$("#id_cliente").on("blur", function(){
+    let id=$("#id_cliente").val();
+    if(id==""){
+        
+        return;
+        
+    }
+    
+     let dados={dado:''};
+    (async () => {
+            const rawResponse = await fetch(url_ler_um_cliente+id, {
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(dados)
+            });
+            
+            const content = await rawResponse.json();
+            if(content.length==0){
+                alert('esse cliente não existe');
+                $("#id_cliente").val('');
+                document.getElementById('nome_do_cliente').innerHTML='';
+                return;
+                
+            }
+            document.getElementById('nome_do_cliente').innerHTML=content[0].nome;
+           
+           
+            
+           
+    })();
+    
+    
+    
+    
+});
+
+
 
 //valida email
 $("#email").on("blur", function(){
