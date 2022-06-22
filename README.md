@@ -1,8 +1,8 @@
 # Teste - r
-## acesso externo
+## Acesso externo
 https://teste-r.pratics.com.br/
 
-## obs
+## Obs
 - pattern Singleton(desafio-r/app/application/libraries/Connection.php) e MVC(projeto)
 - lib de idioma(pt|en)-https://teste-r.pratics.com.br/?lang=en
 - Desenvolvido utilizando como base o conceito de API R, a aplicação se comunica de forma totalmente a parte
